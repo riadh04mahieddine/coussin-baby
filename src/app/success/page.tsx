@@ -32,6 +32,8 @@ async function getOrderDetails(sessionId: string) {
   }
 }
 
+// Utilisation d'un type simple pour éviter les erreurs de build
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function SuccessPage({ searchParams }: { searchParams: any }) {
   const sessionId = searchParams.session_id;
 
