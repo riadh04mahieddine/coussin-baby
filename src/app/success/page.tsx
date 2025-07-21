@@ -1,4 +1,3 @@
-// @ts-nocheck - Désactiver la vérification de type pour ce fichier
 import React from 'react';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
@@ -33,7 +32,7 @@ async function getOrderDetails(sessionId: string) {
   }
 }
 
-export default async function SuccessPage({ searchParams }: { searchParams: { session_id?: string } }) {
+export default async function SuccessPage({ searchParams }: { searchParams: any }) {
   const sessionId = searchParams.session_id;
 
   if (!sessionId) {
