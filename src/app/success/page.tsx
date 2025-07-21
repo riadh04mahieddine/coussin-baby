@@ -7,6 +7,7 @@ import connectToDatabase from '@/lib/mongodb';
 import Order from '@/models/Order';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ConversionTracker from '@/components/ConversionTracker';
 
 async function getOrderDetails(sessionId: string) {
   try {
@@ -126,6 +127,12 @@ export default async function SuccessPage({ searchParams }: { searchParams: any 
               <Link href="/" className="inline-block bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg transition-colors">
                 Continuer mes achats
               </Link>
+              {/* Ajout du tracker de conversion TikTok */}
+              <ConversionTracker 
+                orderValue={order.product.price} 
+                productName={order.product.name}
+                orderId={order._id.toString()}
+              />
             </div>
           </div>
         </div>

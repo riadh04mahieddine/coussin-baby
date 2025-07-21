@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import TikTokPixel from '../components/TikTokPixel';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -54,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.className} bg-gradient-to-br from-sky-200 to-pink-200 min-h-screen`}>
+        <TikTokPixel />
         {children}
       </body>
     </html>
