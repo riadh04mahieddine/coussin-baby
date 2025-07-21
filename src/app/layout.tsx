@@ -7,6 +7,34 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: "Coussin de Protection Anti-Chute pour Bébé | CoussinBaby.com",
   description: "Protégez la tête et le dos de votre bébé avec le coussin de sécurité CoussinBaby. Léger et confortable, il accompagne ses premières explorations en toute sérénité. Livraison rapide.",
+  metadataBase: new URL('https://www.coussinbaby.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Coussin de Protection Anti-Chute pour Bébé | CoussinBaby.com',
+    description: 'Protégez la tête et le dos de votre bébé avec le coussin de sécurité CoussinBaby. Léger et confortable, il accompagne ses premières explorations en toute sérénité.',
+    url: 'https://www.coussinbaby.com',
+    siteName: 'CoussinBaby',
+    images: [
+      {
+        url: 'https://www.coussinbaby.com/images/cushion-1.png',
+        width: 800,
+        height: 600,
+        alt: 'Coussin de protection pour bébé',
+      },
+    ],
+    locale: 'fr_FR',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', type: 'image/x-icon', sizes: 'any' },
