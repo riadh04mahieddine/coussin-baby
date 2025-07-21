@@ -1,5 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+export interface IBundle {
+  id: number;
+  name: string;
+  originalPrice: number;
+  salePrice: number;
+  discount: number;
+  options?: number;
+  bestDeal?: boolean;
+}
+
 export interface IOrder extends Document {
   customerName: string;
   customerEmail: string;
@@ -14,7 +24,7 @@ export interface IOrder extends Document {
   product: {
     name: string;
     color: string;
-    bundle: { [key: string]: any };
+    bundle: IBundle;
     options?: { [key: string]: string };
     price: number;
   };

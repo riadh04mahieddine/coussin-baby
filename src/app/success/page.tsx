@@ -48,8 +48,8 @@ export default async function SuccessPage({ searchParams }: { searchParams: { se
         <main className="min-h-screen flex items-center justify-center p-4">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-red-600">Erreur de Commande</h1>
-            <p className="text-gray-600 mt-2">Nous n'avons pas pu charger les détails de votre commande. Veuillez vérifier vos emails ou contacter le support.</p>
-            <Link href="/" className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">Retour à l'accueil</Link>
+            <p className="text-gray-600 mt-2">Nous n&apos;avons pas pu charger les détails de votre commande. Veuillez vérifier vos emails ou contacter le support.</p>
+            <Link href="/" className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">Retour à l&apos;accueil</Link>
           </div>
         </main>
         <Footer />
@@ -116,7 +116,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: { se
                   <div className="flex items-center text-gray-600 space-x-3">
                     <span className="bg-yellow-200 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">En cours de préparation</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-4">Vous recevrez un email de confirmation d'expédition dès que votre colis sera en route.</p>
+                  <p className="text-sm text-gray-500 mt-4">Vous recevrez un email de confirmation d&apos;expédition dès que votre colis sera en route.</p>
               </div>
             </div>
 

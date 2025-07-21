@@ -22,7 +22,7 @@ const LegalPage = () => {
             <p><strong>Directeur de la publication :</strong> [À compléter]</p>
 
             <h2 className="text-2xl font-semibold mt-6">Hébergeur</h2>
-            <p>L'hébergement du site est assuré par la société Vercel Inc., dont le siège social est situé au 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.</p>
+            <p>L&apos;hébergement du site est assuré par la société Vercel Inc., dont le siège social est situé au 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.</p>
           </div>
         </div>
       </main>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@stripe/stripe-js": "^7.5.0",
     "framer-motion": "^12.23.6",
     "mongodb": "^6.17.0",

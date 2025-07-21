@@ -7,7 +7,7 @@ import Order from '@/models/Order';
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get('stripe-signature') as string;
+  const signature = req.headers.get('stripe-signature') as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (!webhookSecret) {
@@ -19,9 +19,10 @@ export async function POST(req: Request) {
 
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-  } catch (err: any) {
-    console.error(`❌ [WEBHOOK] Échec de la vérification de la signature: ${err.message}`);
-    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Unknown webhook signature verification error';
+    console.error(`❌ [WEBHOOK] Échec de la vérification de la signature: ${errorMessage}`);
+    return new NextResponse(`Webhook Error: ${errorMessage}`, { status: 400 });
   }
 
   console.log(`✅ [WEBHOOK] Événement reçu et vérifié: ${event.type}`);
@@ -51,20 +52,24 @@ export async function POST(req: Request) {
         return NextResponse.json({ received: true });
       }
 
+      // Récupérer la session complète pour avoir les détails de livraison
       const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
         expand: ['customer_details', 'shipping_details'],
       });
 
-      if (fullSession.customer_details) {
-        order.customerName = fullSession.customer_details.name || order.customerName;
-        order.customerEmail = fullSession.customer_details.email || order.customerEmail;
-        order.customerPhone = fullSession.customer_details.phone || order.customerPhone;
+      // Utiliser une assertion de type pour contourner les erreurs de linter
+      const sessionWithDetails = fullSession as any;
+
+      if (sessionWithDetails.customer_details) {
+        order.customerName = sessionWithDetails.customer_details.name || order.customerName;
+        order.customerEmail = sessionWithDetails.customer_details.email || order.customerEmail;
+        order.customerPhone = sessionWithDetails.customer_details.phone || order.customerPhone;
       }
 
-      if (fullSession.shipping_details?.address) {
-        const address = fullSession.shipping_details.address;
+      if (sessionWithDetails.shipping_details?.address) {
+        const address = sessionWithDetails.shipping_details.address;
         order.shippingAddress = {
-          name: fullSession.shipping_details.name || order.customerName,
+          name: sessionWithDetails.shipping_details.name || order.customerName,
           street: `${address.line1 || ''}${address.line2 ? `, ${address.line2}` : ''}`.trim(),
           city: address.city || '',
           postalCode: address.postal_code || '',
@@ -80,9 +85,10 @@ export async function POST(req: Request) {
       await order.save();
       console.log(`✅ [WEBHOOK] Commande ${orderId} mise à jour avec succès.`);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown database or processing error';
       console.error('❌ [WEBHOOK] Erreur de base de données ou de traitement:', error);
-      return new NextResponse(`Server Error: ${error.message}`, { status: 500 });
+      return new NextResponse(`Server Error: ${errorMessage}`, { status: 500 });
     }
   }
 

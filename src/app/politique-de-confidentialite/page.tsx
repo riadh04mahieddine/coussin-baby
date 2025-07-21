@@ -16,7 +16,7 @@ const PrivacyPage = () => {
             <p>Lorsque vous visitez le Site, nous collectons automatiquement certaines informations sur votre appareil... [À compléter avec les détails sur la collecte de données, cookies, etc.]</p>
 
             <h2 className="text-2xl font-semibold mt-6">Vos droits</h2>
-            <p>Si vous êtes un résident européen, vous disposez d'un droit d'accès aux informations personnelles que nous détenons à votre sujet et de demander que vos informations personnelles soient corrigées, mises à jour ou supprimées. [À compléter...]</p>
+            <p>Si vous êtes un résident européen, vous disposez d&apos;un droit d&apos;accès aux informations personnelles que nous détenons à votre sujet et de demander que vos informations personnelles soient corrigées, mises à jour ou supprimées. [À compléter...]</p>
           </div>
         </div>
       </main>

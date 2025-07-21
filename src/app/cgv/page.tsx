@@ -14,7 +14,7 @@ const CgvPage = () => {
             <p>Les présentes conditions régissent les ventes par la société [Nom de votre société] de coussins de protection pour bébé. [À compléter avec le reste de vos CGV...]</p>
             
             <h2 className="text-2xl font-semibold mt-6">Article 2 : Prix</h2>
-            <p>Les prix de nos produits sont indiqués en euros toutes taxes comprises (TVA et autres taxes applicables au jour de la commande), sauf indication contraire et hors frais de traitement et d'expédition. [À compléter...]</p>
+            <p>Les prix de nos produits sont indiqués en euros toutes taxes comprises (TVA et autres taxes applicables au jour de la commande), sauf indication contraire et hors frais de traitement et d&apos;expédition. [À compléter...]</p>
 
             <h2 className="text-2xl font-semibold mt-6">Article 3 : Commandes</h2>
             <p>Vous pouvez passer commande sur notre site internet coussinbaby.fr. [À compléter...]</p>

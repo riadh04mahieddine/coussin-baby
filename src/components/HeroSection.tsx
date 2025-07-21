@@ -47,11 +47,10 @@ const HeroSection = () => {
 
   const renderOptions = () => {
     const bundle = bundles.find(b => b.id === selectedBundle);
-    if (!bundle) return null;
-
-    // Pour le pack de 1, on utilise la sélection de couleur principale.
-    // Pour les packs > 1, on affiche les dropdowns.
-    if (bundle.options < 2) return null;
+    // S'assurer que le bundle et ses options sont valides
+    if (!bundle || typeof bundle.options !== 'number' || bundle.options < 2) {
+      return null;
+    }
 
     return (
       <div className="mt-4 space-y-4">
@@ -136,11 +135,12 @@ const HeroSection = () => {
       
       const data = await response.json();
       
-      if (!response.ok) {
-        throw new Error(data.error || 'Une erreur est survenue');
-      } else {
-        throw new Error(data.error || 'Erreur inconnue');
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || 'Une erreur est survenue lors de la création de la session de paiement.');
       }
+
+      // Rediriger vers la page de paiement Stripe
+      router.push(data.url);
     } catch (error) {
       console.error('Checkout error:', error);
       setIsLoading(false);
@@ -169,7 +169,7 @@ const HeroSection = () => {
           </div>
 
           <div className="md:w-1/2 flex flex-col">
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Gardez l'esprit tranquille pendant que bébé explore</h1>
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Gardez l&apos;esprit tranquille pendant que bébé explore</h1>
             <p className="text-md text-gray-600 mt-2">Protège sa tête et son dos des chutes, pour une exploration en toute sécurité.</p>
             
             <div className="flex items-center mt-3 gap-2">

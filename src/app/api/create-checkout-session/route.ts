@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 import connectToDatabase from '@/lib/mongodb';
-import Order from '@/models/Order';
+import Order, { IBundle } from '@/models/Order';
+
+interface CheckoutRequestBody {
+  color: string;
+  bundle: IBundle;
+  options?: { [key: string]: string };
+  price: number;
+  customerEmail?: string;
+}
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body: CheckoutRequestBody = await request.json();
     const { color, bundle, options, price, customerEmail } = body;
 
     if (!color || !bundle || !price) {
@@ -84,7 +92,7 @@ export async function POST(request: Request) {
       metadata: {
         orderId: newOrder._id.toString(),
         productColor: color,
-        productBundle: bundle.toString(),
+        productBundle: JSON.stringify(bundle),
         productPrice: price.toString(),
         productOptions: options ? JSON.stringify(options) : '',
         customerEmailInitial: customerEmail || '',
@@ -102,10 +110,11 @@ export async function POST(request: Request) {
     
     return NextResponse.json({ url: session.url });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Erreur lors de la création de la session de paiement:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Une erreur inconnue est survenue';
     return NextResponse.json(
-      { error: error.message || 'Une erreur est survenue' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
