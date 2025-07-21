@@ -32,7 +32,11 @@ async function getOrderDetails(sessionId: string) {
   }
 }
 
-export default async function SuccessPage({ searchParams }: { searchParams: { session_id?: string } }) {
+// Correction du typage pour Next.js 15
+type SearchParams = { session_id?: string }
+type Props = { searchParams: SearchParams }
+
+export default async function SuccessPage({ searchParams }: Props) {
   const sessionId = searchParams.session_id;
 
   if (!sessionId) {
