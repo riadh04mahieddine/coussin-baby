@@ -1,9 +1,27 @@
 import { Stripe } from 'stripe';
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 import stripe from '@/lib/stripe';
 import connectToDatabase from '@/lib/mongodb';
 import Order from '@/models/Order';
+
+// Interface pour typer la session étendue
+interface SessionWithDetails {
+  customer_details?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
+  shipping_details?: {
+    name?: string;
+    address?: {
+      line1?: string;
+      line2?: string;
+      city?: string;
+      postal_code?: string;
+      country?: string;
+    };
+  };
+}
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -57,8 +75,8 @@ export async function POST(req: Request) {
         expand: ['customer_details', 'shipping_details'],
       });
 
-      // Utiliser une assertion de type pour contourner les erreurs de linter
-      const sessionWithDetails = fullSession as any;
+      // Convertir la session en type étendu avec les détails
+      const sessionWithDetails = fullSession as unknown as SessionWithDetails;
 
       if (sessionWithDetails.customer_details) {
         order.customerName = sessionWithDetails.customer_details.name || order.customerName;

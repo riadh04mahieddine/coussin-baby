@@ -1,4 +1,4 @@
-import { Readable } from 'stream';
+// Import supprimé car non utilisé
 
 // Fonction pour lire le corps brut d'une requête stream
 export async function getRawBody(readable: ReadableStream<Uint8Array>): Promise<Buffer> {

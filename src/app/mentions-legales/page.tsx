@@ -13,7 +13,7 @@ const LegalPage = () => {
             <p>Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique, dite L.C.E.N., il est porté à la connaissance des utilisateurs et visiteurs du site Coussin Baby les présentes mentions légales.</p>
             
             <h2 className="text-2xl font-semibold mt-6">Éditeur du site</h2>
-            <p><strong>Nom de l'entreprise :</strong> [À compléter]</p>
+            <p><strong>Nom de l&apos;entreprise :</strong> [À compléter]</p>
             <p><strong>Forme juridique :</strong> [À compléter]</p>
             <p><strong>Adresse :</strong> [À compléter]</p>
             <p><strong>Capital social :</strong> [À compléter]</p>

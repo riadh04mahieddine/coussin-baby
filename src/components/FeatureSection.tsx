@@ -43,10 +43,9 @@ const FeatureSection = () => {
             </div>
           </motion.div>
           <motion.div className="md:w-1/2" variants={itemVariants}>
-            <h3 className="text-2xl font-bold mb-6 text-pink-600">Tranquillité d'Esprit pour les Parents</h3>
+            <h3 className="text-2xl font-bold mb-6 text-pink-600">Tranquillité d&apos;Esprit pour les Parents</h3>
             <p className="text-lg mb-6 text-gray-700 leading-relaxed">
-              Notre coussin de protection offre une tranquillité d'esprit en protégeant la tête de votre bébé 
-              lors des chutes en arrière pendant les moments de jeu et d'exploration.
+              Notre coussin de protection offre une tranquillité d&apos;esprit en protégeant la tête de votre bébé 
               lors des chutes en arrière pendant les moments de jeu et d&apos;exploration.
             </p>
             <ul className="space-y-4">

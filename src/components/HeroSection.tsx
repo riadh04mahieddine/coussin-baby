@@ -9,7 +9,8 @@ const HeroSection = () => {
   const [selectedColor, setSelectedColor] = useState('blanc');
   const [selectedBundle, setSelectedBundle] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState<{[key: string]: string}>({});
-    const [mainImage, setMainImage] = useState('/images/rose.png');
+  // Suppression de la variable non utilisée setMainImage
+  const [mainImage] = useState('/images/rose.png');
   const [isLoading, setIsLoading] = useState(false);
 
     const colors = [
