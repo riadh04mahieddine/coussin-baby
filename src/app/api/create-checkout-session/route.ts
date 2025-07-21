@@ -71,7 +71,8 @@ export async function POST(request: Request) {
             product_data: {
               name: 'Coussin de Protection pour la Tête',
               description: `Couleur: ${color}, Pack: ${bundle}${optionsDescription ? `, Options: ${optionsDescription}` : ''}`,
-              images: [`${process.env.NEXT_PUBLIC_BASE_URL}/images/cushion-1.png`],
+              // Ajout explicite du schéma https:// pour l'URL de l'image
+              images: [`https://${process.env.NEXT_PUBLIC_VERCEL_URL || 'www.coussinbaby.com'}/images/cushion-1.png`],
             },
             unit_amount: priceInCents,
           },
@@ -79,8 +80,9 @@ export async function POST(request: Request) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+      // Ajout explicite du schéma https:// pour les URLs
+      success_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL || 'www.coussinbaby.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL || 'www.coussinbaby.com'}/`,
       locale: 'fr',
       shipping_address_collection: {
         allowed_countries: ['FR', 'BE', 'CH', 'LU', 'DE', 'ES', 'IT', 'GB'],
