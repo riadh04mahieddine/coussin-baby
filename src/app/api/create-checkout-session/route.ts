@@ -71,8 +71,8 @@ export async function POST(request: Request) {
             product_data: {
               name: 'Coussin de Protection pour la Tête',
               description: `Couleur: ${color}, Pack: ${bundle}${optionsDescription ? `, Options: ${optionsDescription}` : ''}`,
-              // Utilisation du domaine personnalisé pour l'URL de l'image
-              images: [`https://www.coussinbaby.com/images/cushion-1.png`],
+              // Utilisation de l'image correspondant à la couleur sélectionnée
+              images: [`https://www.coussinbaby.com/images/${color.toLowerCase()}.png`],
             },
             unit_amount: priceInCents,
           },

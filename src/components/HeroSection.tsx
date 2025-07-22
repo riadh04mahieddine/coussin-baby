@@ -9,8 +9,7 @@ const HeroSection = () => {
   const [selectedColor, setSelectedColor] = useState('blanc');
   const [selectedBundle, setSelectedBundle] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState<{[key: string]: string}>({});
-  // Suppression de la variable non utilisée setMainImage
-  const [mainImage] = useState('/images/rose.png');
+  const [mainImage, setMainImage] = useState('/images/rose.png');
   const [isLoading, setIsLoading] = useState(false);
 
     const colors = [
@@ -29,6 +28,11 @@ const HeroSection = () => {
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
+    // Trouver l'objet couleur correspondant et mettre à jour l'image principale
+    const selectedColorObj = colors.find(c => c.name === color);
+    if (selectedColorObj) {
+      setMainImage(selectedColorObj.image);
+    }
   };
 
   const handleBundleSelect = (bundleId: number) => {
