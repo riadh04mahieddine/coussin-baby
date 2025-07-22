@@ -101,10 +101,10 @@ export default async function SuccessPage({ searchParams }: { searchParams: any 
                   <h3 className="font-bold text-gray-800 mb-4">Articles commandés</h3>
                   <div className="space-y-3">
                     <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                      {/* Utilisation d'une image fixe pour éviter les erreurs */}
+                      {/* Affichage dynamique de l'image selon la couleur */}
                       <Image 
-                        src="/images/rose.png" 
-                        alt="Coussin Bébé" 
+                        src={`/images/${order.product.color.toLowerCase()}.png`} 
+                        alt={`Coussin Bébé ${order.product.color}`} 
                         width={60} 
                         height={60} 
                         className="rounded-md" 
