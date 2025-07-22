@@ -25,6 +25,14 @@ async function getOrderDetails(sessionId: string) {
       throw new Error('Commande non trouvée dans la base de données.');
     }
 
+    // Logs pour déboguer
+    console.log("Détails de la commande récupérés:", {
+      id: order._id,
+      color: order.product.color,
+      bundle: order.product.bundle,
+      options: order.product.options
+    });
+    
     // On retourne uniquement la commande de notre base de données
     return { order };
   } catch (error) {
@@ -99,7 +107,19 @@ export default async function SuccessPage({ searchParams }: { searchParams: any 
                   <h3 className="font-bold text-gray-800 mb-4">Articles commandés</h3>
                   <div className="space-y-3">
                     <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                      <Image src="/images/cushion-1.png" alt="Coussin Bébé" width={60} height={60} className="rounded-md" />
+                      {/* Affichage de l'image en fonction de la couleur du produit */}
+                      <Image 
+                        src={`/images/${String(order.product.color).toLowerCase()}.png`} 
+                        alt={`Coussin Bébé ${order.product.color}`} 
+                        width={60} 
+                        height={60} 
+                        className="rounded-md" 
+                        onError={(e) => {
+                          // Image de secours en cas d'erreur
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/images/rose.png';
+                        }}
+                      />
                       <div>
                         <p className="font-semibold">{order.product.name} (Pack de {order.product.bundle})</p>
                         <div className="text-sm text-gray-500 capitalize">
