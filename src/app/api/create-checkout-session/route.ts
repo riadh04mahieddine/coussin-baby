@@ -80,6 +80,7 @@ export async function POST(request: Request) {
         },
       ],
       mode: 'payment',
+      allow_promotion_codes: true,
       // Utilisation du domaine personnalisé pour les URLs
       success_url: `https://www.coussinbaby.com/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `https://www.coussinbaby.com/`,
