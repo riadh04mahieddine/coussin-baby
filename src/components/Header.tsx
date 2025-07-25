@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full p-4">
-      <nav className="container mx-auto flex justify-center items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg">
+    <header className="sticky top-0 z-50 w-full p-2">
+      <nav className="container mx-auto flex justify-center items-center bg-white/80 backdrop-blur-md rounded-xl p-2 shadow-lg">
         <Link href="/">
           <Image 
             src="/images/logo.png"

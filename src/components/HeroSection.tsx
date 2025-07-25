@@ -21,9 +21,9 @@ const HeroSection = () => {
   ];
 
   const bundles = [
-    { id: 1, name: 'Achetez 1', originalPrice: 33.49, salePrice: 19.99, discount: 40 },
-    { id: 2, name: 'Achetez 2', originalPrice: 66.98, salePrice: 39.98, discount: 40, options: 2 },
-    { id: 3, name: 'Achetez 3', originalPrice: 100.47, salePrice: 49.97, discount: 50, options: 3, bestDeal: true },
+    { id: 1, name: 'X1', originalPrice: 33.49, salePrice: 19.99, discountText: 'ÉCONOMISEZ 40%', badge: null },
+    { id: 2, name: 'X2', originalPrice: 66.98, salePrice: 39.98, discountText: 'ÉCONOMISEZ 50%', badge: 'PRÉFÉRÉ', options: 2 },
+    { id: 3, name: 'X3', originalPrice: 100.47, salePrice: 49.97, discountText: 'ÉCONOMISEZ 60%', badge: 'PREMIUM', options: 3 },
   ];
 
   const handleColorSelect = (color: string) => {
@@ -174,21 +174,28 @@ const HeroSection = () => {
           </div>
 
           <div className="md:w-1/2 flex flex-col">
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Gardez l&apos;esprit tranquille pendant que bébé explore</h1>
-            <p className="text-md text-gray-600 mt-2">Protège sa tête et son dos des chutes, pour une exploration en toute sécurité.</p>
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Coussin Protection Anti-Chute Bébé – Coussin protection tête bébé</h1>
             
             <div className="flex items-center mt-3 gap-2">
             <Image src="/images/Google.svg.webp" alt="Avis Google" width={20} height={20} className="h-5 w-auto"/>              <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => <svg key={i} className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>)}
               </div>
-              <span className="text-sm text-gray-600">+450 avis vérifiés</span>
+              <span className="text-sm text-gray-800">+450 avis clients</span>
             </div>
 
-            <div className="my-3">
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-blue-600">{bundles.find(b => b.id === selectedBundle)?.salePrice.toFixed(2)} €</span>
-                <span className="text-lg text-gray-500 line-through">{bundles.find(b => b.id === selectedBundle)?.originalPrice.toFixed(2)} €</span>
+            <div className="my-4">
+              <div className="flex items-baseline gap-3">
+                <span className="text-4xl font-bold text-blue-600">{bundles.find(b => b.id === selectedBundle)?.salePrice.toFixed(2)} €</span>
+                <span className="text-xl text-gray-500 line-through">{bundles.find(b => b.id === selectedBundle)?.originalPrice.toFixed(2)} €</span>
               </div>
+            </div>
+
+            <div className="my-4 space-y-2 text-sm text-gray-700">
+              <p><span className="text-xl mr-2">👶</span> Âge : <span className="font-semibold">1 à 3 ans</span></p>
+              <p><span className="text-xl mr-2">🚫</span> <span className="font-semibold">Éviter les chutes</span> de bébé</p>
+              <p><span className="text-xl mr-2">🧼</span> <span className="font-semibold">Nettoyage facile</span> à la machine : 30 degrés</p>
+              <p><span className="text-xl mr-2">🌿</span> Coton PP ultra-doux, <span className="font-semibold">souple et résistant</span></p>
+              
             </div>
 
             <div className="border-t border-gray-200 my-3"></div>
@@ -211,26 +218,34 @@ const HeroSection = () => {
 
               <div className="border-t border-gray-200 my-3"></div>
 
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-800">2. Choisissez votre pack</h3>
-                {bundles.map((bundle) => (
-                  <div key={bundle.id} className={`border rounded-lg transition-all ${selectedBundle === bundle.id ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-300' : 'border-gray-200 hover:border-gray-400'}`}>
-                    <div onClick={() => handleBundleSelect(bundle.id)} className="p-3 cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <input type="radio" id={`bundle-${bundle.id}`} name="bundle" readOnly checked={selectedBundle === bundle.id} className="w-4 h-4 accent-blue-600"/>
-                          <label htmlFor={`bundle-${bundle.id}`} className="font-medium text-gray-800 cursor-pointer text-sm">{bundle.name} <span className={`ml-2 text-xs text-white px-2 py-0.5 rounded ${bundle.bestDeal ? 'bg-red-500' : 'bg-blue-500'}`}>ÉCONOMISEZ {bundle.discount}%</span></label>
-                        </div>
-                        {bundle.bestDeal && <span className="text-xs font-bold text-red-500">MEILLEURE OFFRE</span>}
+              <div className="space-y-4 mb-6">
+                <h3 className="text-lg font-semibold text-gray-800 text-center">Choisissez votre quantité :</h3>
+                <div className="flex justify-center items-stretch gap-3 sm:gap-4 max-w-[18rem] mx-auto">
+                  {bundles.map((bundle) => {
+                    const isSelected = selectedBundle === bundle.id;
+                    return (
+                      <div
+                        key={bundle.id}
+                        onClick={() => handleBundleSelect(bundle.id)}
+                        className={`relative cursor-pointer rounded-xl border-2 p-4 pt-8 text-center transition-all duration-300 flex-1 flex flex-col justify-center items-center ${isSelected ? 'border-pink-400 bg-pink-50 shadow-lg' : 'border-gray-300 bg-white hover:border-pink-300'}`}>
+                        {bundle.badge && (
+                          <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-white ${bundle.badge === 'PREMIUM' ? 'bg-pink-500' : 'bg-pink-400'}`}>
+                            {bundle.badge}
+                          </div>
+                        )}
+                        <p className="text-2xl sm:text-3xl font-bold text-gray-800">{bundle.name}</p>
+                        {bundle.discountText && (
+                          <p className="mt-1 text-sm font-semibold text-gray-600">{bundle.discountText}</p>
+                        )}
                       </div>
-                    </div>
-                    {selectedBundle === bundle.id && (bundle.options ?? 0) > 1 && (
-                      <div className="p-3 border-t border-gray-200">
-                        {renderOptions()}
-                      </div>
-                    )}
+                    );
+                  })}
+                </div>
+                {bundles.find(b => b.id === selectedBundle && (b.options ?? 0) > 1) && (
+                  <div className="p-3 border-t border-gray-200">
+                    {renderOptions()}
                   </div>
-                ))}
+                )}
               </div>
 
               <button onClick={handleCheckout} disabled={isLoading} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-all transform hover:scale-105 relative text-lg flex items-center justify-center gap-2">
